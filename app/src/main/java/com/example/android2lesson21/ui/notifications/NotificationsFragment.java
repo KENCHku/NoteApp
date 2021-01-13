@@ -1,4 +1,4 @@
-package com.example.android2lesson11.ui.notifications;
+package com.example.android2lesson21.ui.notifications;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.android2lesson11.R;
+import com.example.android2lesson21.R;
 
 public class NotificationsFragment extends Fragment {
 

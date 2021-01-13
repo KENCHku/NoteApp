@@ -1,8 +1,9 @@
-package com.example.android2lesson11;
+package com.example.android2lesson21;
 
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.android2lesson21.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
@@ -49,5 +50,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onSupportNavigateUp() {
         return NavigationUI.navigateUp(navController, appBarConfiguration) || super.onSupportNavigateUp();
+
     }
+
+    public void closeFragment() {//close a fragment by
+        navController.navigateUp();
+    }
+
+
 }

@@ -1,4 +1,4 @@
-package com.example.android2lesson11.ui.profile;
+package com.example.android2lesson21.ui.profile;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -12,14 +12,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.android2lesson11.R;
-import com.example.android2lesson11.ui.notifications.NotificationsViewModel;
+
+import com.example.android2lesson21.R;
 
 import static android.app.Activity.RESULT_OK;
 
