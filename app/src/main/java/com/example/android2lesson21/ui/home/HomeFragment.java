@@ -48,8 +48,8 @@ public class HomeFragment extends Fragment {
     private void add10() {
         for (int i = 10; i > 0; i--) {
             //on 51 that's for time view
-            //String date = java.text.DateFormat.getDateTimeInstance().format(new Date());
-            adapter.addItem(new Note("This is note " + i/*,date*/));
+            String date = java.text.DateFormat.getDateTimeInstance().format(new Date());
+            adapter.addItem(new Note("This is note: " + i,", date: "+date));
         }
     }
 
@@ -118,9 +118,13 @@ public class HomeFragment extends Fragment {
                         Note note = (Note) result.getSerializable("note");
                         adapter.addItem(note);
                         // Log.e("Home", "text = "+result.getString("text"));
+
                     }
                 });
     }
+
+
+
 
 
 

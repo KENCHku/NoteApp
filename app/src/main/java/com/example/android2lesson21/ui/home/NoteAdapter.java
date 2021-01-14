@@ -23,6 +23,7 @@ import com.example.android2lesson21.models.Note;
 import com.example.android2lesson21.ui.form.FormFragment;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
 
@@ -30,23 +31,24 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
     private ArrayList<Note> list;
     //hw
     private OnItemClickListener onItemClickListener;
-//hw
-    private Context context;
+    //hw
+
 
     public NoteAdapter() {
         list = new ArrayList<>();
-        this.context = context;
+
         //task 1
-        list.add(new Note("one"));
-        list.add(new Note("two"));
-        list.add(new Note("three"));
-        list.add(new Note("four"));
-        list.add(new Note("five"));
-        list.add(new Note("six"));
-        list.add(new Note("seven"));
-        list.add(new Note("eight"));
-        list.add(new Note("nine"));
-        list.add(new Note("ten"));
+        String date = java.text.DateFormat.getDateTimeInstance().format(new Date());
+        list.add(new Note("one, date: ", date));
+        list.add(new Note("two, date: ", date));
+        list.add(new Note("three, date: ", date));
+        list.add(new Note("four, date: ", date));
+        list.add(new Note("five, date: ", date));
+        list.add(new Note("six, date: ", date));
+        list.add(new Note("seven, date: ", date));
+        list.add(new Note("eight, date: ", date));
+        list.add(new Note("nine, date: ", date));
+        list.add(new Note("ten, date: ", date));
 
     }
 
@@ -66,7 +68,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
         //================================чередование цветов бэкграунда списка================
         if (position % 2 == 1)//чередование цвета бэкграунда у списка
         {
-            holder.itemView.setBackgroundColor(Color.parseColor("#FF6200EE"));
+            holder.itemView.setBackgroundColor(Color.parseColor("#FFBB86FC"));
             //  holder.imageView.setBackgroundColor(Color.parseColor("#FFFFFF"));
         } else {
             holder.itemView.setBackgroundColor(Color.parseColor("#FF018786"));
@@ -83,7 +85,13 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
         list.add(note);
         notifyDataSetChanged();
     }
+
     //================================here is homework tasks================
+    @Override
+    public void registerAdapterDataObserver(@NonNull RecyclerView.AdapterDataObserver observer) {//for the time view
+        super.registerAdapterDataObserver(observer);
+    }
+
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
@@ -96,7 +104,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
 
     public void remove(int position) {
         list.remove(position);
-        notifyDataSetChanged();
+        notifyItemRemoved(position);
     }
 
     //===============================ViewHolder===================================
@@ -113,7 +121,6 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
                 @Override
                 public void onClick(View v) {
                     onItemClickListener.onClick(getAdapterPosition());
-
                 }
             });
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
@@ -125,16 +132,14 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
             });
 
 
-
         }
 
         public void onBind(Note note) {
-            textTitle.setText(note.getTitle());
+            textTitle.setText(note.getTitle()+" "+note.getDate());
+
         }
     }
 }
-
-
 
 
 

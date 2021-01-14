@@ -17,6 +17,8 @@ import com.example.android2lesson21.MainActivity;
 import com.example.android2lesson21.R;
 import com.example.android2lesson21.models.Note;
 
+import java.util.Date;
+
 
 public class FormFragment extends Fragment {
 
@@ -47,7 +49,9 @@ public class FormFragment extends Fragment {
             String text = editText.getText().toString().trim();//trim removes odd spaces!!!
             //in programming space is too as symbol !!! !!! !!!
 
-            Note note = new Note(text);
+
+        String date = java.text.DateFormat.getDateTimeInstance().format(new Date());
+        Note note = new Note(text,date);
 
             Bundle bundle = new Bundle();
             bundle.putSerializable("note", note);
