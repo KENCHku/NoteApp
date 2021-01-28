@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/clear_settings"
+        android:icon="@drawable/ic_more_vert"
+        android:title="clear settings"
+        />
+    <item
+        android:id="@+id/sortByA_Z"
+        android:icon="@drawable/ic_more_vert"
+        android:title="A-Z"
+        />
+    <item
+        android:id="@+id/sortByDate"
+        android:icon="@drawable/ic_more_vert"
+        android:title="DATE"
+        />
+
+
+
+</menu>
