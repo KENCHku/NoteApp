@@ -1,5 +1,6 @@
 package com.example.android2lesson31.models;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -8,22 +9,28 @@ import java.io.Serializable;
 @Entity
 public class Note implements Serializable {
 
-    @PrimaryKey(autoGenerate = true)
-    private long id;
+  //  @PrimaryKey(autoGenerate = true)
+  @PrimaryKey
+  @NonNull
+    private String noteId;
     private String title;
     private String date;
+
+    public Note() {
+    }
 
     public Note(String title, String date) {
         this.title = title;
         this.date = date;
     }
 
-    public long getId() {
-        return id;
+
+    public String getNoteId() {
+        return noteId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setNoteId(String noteId) {
+        this.noteId = noteId;
     }
 
     public String getDate() {

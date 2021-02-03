@@ -5,6 +5,7 @@ import android.view.View;
 
 import com.example.android2lesson31.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,9 +33,12 @@ public class MainActivity extends AppCompatActivity {
         Prefs prefs = new Prefs(this);
         if (!prefs.isShown())
             navController.navigate(R.id.boardFragment);
-        else
-            navController.navigate(R.id.navigation_profile);
+
+       else if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+            navController.navigate(R.id.phoneFragment);
+        }
     }
+
 
     private void initNavController() {
         BottomNavigationView navView = findViewById(R.id.nav_view);
@@ -57,15 +61,14 @@ public class MainActivity extends AppCompatActivity {
                 list.add(R.id.navigation_dashboard);
                 list.add(R.id.navigation_notifications);
                 list.add(R.id.navigation_profile);
-                if (list.contains(destination.getId())){//если лист содержит эти четверо
+                if (list.contains(destination.getId())) {//если лист содержит эти четверо
                     navView.setVisibility(View.VISIBLE);//то табы видны
-                }else{
+                } else {
                     navView.setVisibility(View.GONE);//иначе нет
                 }
-                if (destination.getId()==R.id.boardFragment){
+                if (destination.getId() == R.id.boardFragment) {
                     getSupportActionBar().hide();
-                }
-                else {
+                } else {
                     getSupportActionBar().show();
                 }
             }
@@ -84,4 +87,4 @@ public class MainActivity extends AppCompatActivity {
 }
 /*
 
-  */
+ */

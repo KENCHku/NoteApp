@@ -3,6 +3,7 @@ package com.example.android2lesson31.ui.home;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,6 +25,10 @@ import com.example.android2lesson31.Prefs;
 import com.example.android2lesson31.R;
 import com.example.android2lesson31.models.Note;
 import com.example.android2lesson31.OnItemClickListener;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -116,13 +121,18 @@ public class HomeFragment extends Fragment {
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                            //here removing from db
                                App.getAppDatabase().noteDao().delete(adapter.getItem(pos));
+                            //then refreshing db
                                App.getAppDatabase().noteDao().update(adapter.getItem(pos));
-                                adapter.remove(pos);
+                              //getting position for deleting from firestore
+                               Note noteForRemoving = adapter.getItem(position);
+                               //removing position
+                               adapter.remove(position);
+                               //method for removing position from firestore
+                                deleteFromFireStore(noteForRemoving);
 
-                              /*  if (list.size()>0) {
-                                    App.getAppDatabase().noteDao().delete(list.get(position));
-                                }*/
+
                             }
                         })
                         .setNegativeButton("No", null)
@@ -130,7 +140,23 @@ public class HomeFragment extends Fragment {
             }
         });
     }
+    private void deleteFromFireStore(Note noteForRemoving) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+        DocumentReference noteRef = db.collection("notes")
+                .document(noteForRemoving.getNoteId());
+
+        noteRef.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()){
+                    Log.e("KKU", "onComplete: Deleted " + noteForRemoving.getTitle());
+                }
+                Log.e("KKU", "onComplete: Failed to delete");
+
+            }
+        });
+    }
 
     private void openForm(Note note) {
         Bundle bundle = new Bundle();
@@ -140,6 +166,8 @@ public class HomeFragment extends Fragment {
         navController.navigate(R.id.formFragment, bundle);
     }
 
+
+    //=========================Here we receive our notes from formFragment===================
     private void setFragmentListener() {
         getParentFragmentManager().setFragmentResultListener(
                 "rk_form",

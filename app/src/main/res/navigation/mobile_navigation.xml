@@ -41,5 +41,10 @@
         android:name="com.example.android2lesson31.ui.board.BoardFragment"
         android:label="fragment_board"
         tools:layout="@layout/fragment_board" />
+    <fragment
+        android:id="@+id/phoneFragment"
+        android:name="com.example.android2lesson31.ui.auth.PhoneFragment"
+        android:label="fragment_phone"
+        tools:layout="@layout/fragment_phone" />
 
 </navigation>

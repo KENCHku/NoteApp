@@ -106,7 +106,6 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
     }
 
     public void setList(List<Note> list) {
-
         this.list.addAll(list);
         notifyDataSetChanged();
     }

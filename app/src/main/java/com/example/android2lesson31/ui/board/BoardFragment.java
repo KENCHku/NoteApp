@@ -106,5 +106,6 @@ public class BoardFragment extends Fragment {
                 requireActivity(),
                 R.id.nav_host_fragment);
         navController.navigateUp();
+        navController.navigate(R.id.phoneFragment);
     }
 }
